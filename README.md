@@ -1,0 +1,1 @@
+# sks-movieservice-ionic2-client
