@@ -8,15 +8,22 @@ import { Studio } from '../models/studios';
 
 @Injectable()
 export class StudioService {
-  private baseUrl = 'http://localhost:8080/MovieServiceWebApp/resources/studios';
-  private headers = new Headers([
-    { 'Content-Type': 'application/json' }]
-  );
 
-  constructor(private http: Http) { }
+  private baseUrl = 'http://localhost:8080/MovieServiceWebApp/resources/studios';
+  
+  constructor(private http: Http) {}
 
   getStudios(): Promise<Studio[]> {
-    return this.http.get(this.baseUrl)
+
+    let username:string = 'writer';
+    let password:string = '123';
+
+    let contentHeaders = new Headers();
+    contentHeaders.append('Accept', 'application/json');
+    contentHeaders.append('Content-Type', 'application/json');
+		contentHeaders.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+
+    return this.http.get(this.baseUrl, {headers: contentHeaders})
       .toPromise()
       .then(response => response.json() as Studio[])
       .catch(this.handleError);
