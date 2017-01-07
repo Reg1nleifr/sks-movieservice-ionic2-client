@@ -1,0 +1,8 @@
+<div text-center padding [hidden]="!isLoading">
+  <ion-spinner></ion-spinner>
+</div>
+<ion-list [hidden]="isLoading">
+  <ion-item *ngFor="let studio of studios" (click)="openDetails(studio)">
+    <h2>{{studio.name}}</h2>
+  </ion-item>
+</ion-list>
